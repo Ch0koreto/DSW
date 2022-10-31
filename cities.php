@@ -1,15 +1,15 @@
-<?php
-@$link = new mysqli('db', 'root', 'test', 'world');
-$error = $link->connect_errno;
-if ($error != null) {
-  echo "<p>El error número: $error </p>";
-  echo "<p>El error dice: $link->connect_error </p>";
-  die(); //Parar ejecución
-}
+<?php 
+  @$link = new mysqli('db', 'root', 'test', 'world');
+  $error = $link->connect_errno;
+  if ($error != null) {
+    echo "<p>El error número: $error</p>";
+    echo "<p>El error dice: $link->connect_error </p>";
+    die(); // Parar la ejecución;
+  }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,61 +26,62 @@ if ($error != null) {
       color: white;
     }
 
-    if td,
-    th {
-      border: 1px solid black;
+    td, th {
+      border: 1px solid navy;
       padding: 2px 8px;
     }
 
     td:nth-child(5) {
-      text-align: end;
+      text-align: right;
     }
 
     tr:nth-child(even) {
-      background-color: turquoise;
+      background-color: aquamarine;
     }
+
   </style>
 </head>
-
 <body>
   <h1>Cities of the World</h1>
   <table>
     <thead>
-      <tr></tr>
-      <th>id</th>
-      <th>Name</th>
-      <th>Country</th>
-      <th>District</th>
-      <th>Population</th>
+      <tr>
+        <th>id</th>
+        <th>Name</th>
+        <th>Country</th>
+        <th>District</th>
+        <th>Population</th>
+      </tr>
     </thead>
-    <?php
-    $limit = "";
-    if (isset($_GET['n'])) {
-      $limit = " LIMIT " . $_GET['n'];
-    }
-
-    $sql = "SELECT * FROM city" . $limit;
-    echo ($sql);
-    $result = $link->query($sql);
-    $country = $result->fetch_array();
-    while ($country != null) {
-    ?>
-      <tbody>
-        <tr></tr>
-        <td><?= $country['ID'] ?></td>
-        <td><?= $country['Name'] ?></td>
-        <td><a href="country.php/?code=<?= $country['CountryCode'] ?>"><?= $country['CountryCode'] ?></a></td>
-        <td><?= $country['District'] ?></td>
-        <td><?= $country['Population'] ?></td>
-      </tbody>
-    <?php
-      $country = $result->fetch_array();
-    }
-    ?>
+    <tbody>
+<?php
+  $limit = "";
+  if (isset($_GET['n'])) {
+    $limit = " LIMIT " . $_GET['n'];
+  }
+  $sql = "SELECT * FROM city" . $limit;
+  echo $sql;
+  $result = $link->query($sql);
+  $row = $result->fetch_array();
+  while ($row != null) {
+?>
+      <tr>
+        <td><?=$row['ID']?></td>
+        <td><?=$row['Name']?></td>
+        <td><a href="country.php?code=<?=$row['CountryCode']?>"><?=$row['CountryCode']?></a>          
+        </td>
+        <td><?=$row['District']?></td>
+        <td><?=$row['Population']?></td>
+      </tr>
+<?php
+    $row = $result->fetch_array();
+  }
+  $result->close();
+?>
+    </tbody>
   </table>
 </body>
-
 </html>
 <?php
-$link->close();
+  $link->close();
 ?>
