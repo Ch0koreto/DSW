@@ -1,7 +1,6 @@
 <?php include "top.php"; ?>
-<?php include('includes/connection.php'); ?>
-<section id="create">
-    <h2>Nuevo contacto</h2>
+<section id="edit">
+    <h2>Editar contacto</h2>
     <nav>
         <p><a href="index.php">Volver</a></p>
     </nav>
@@ -13,13 +12,12 @@
             <label for="surname">Apellidos</label>
             <input type="text" name="surname" id="surname" required>
             <label for="tel">Teléfono</label>
-            <input type="tel" name="tel" id="tel">
+            <input type="tel" name="tel" id="tel" required>
             <label for="email">Correo electrónico</label>
-            <input type="email" name="email" id="email">
-            <input type="reset" value="Limpiar">
-            <input type="submit" value="Crear">
+            <input type="email" name="email" id="email" required>
+            <button type="submit" name="action" value="update">Actualizar</button>
+            <button type="submit" name="action" value="delete">Eliminar</button>
         </fieldset>
     </form>
 </section>
-<?php include("includes/disconnect.php"); ?>
 <?php include "bottom.php"; ?>

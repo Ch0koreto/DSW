@@ -1,5 +1,4 @@
 <?php include "top.php"; ?>
-<?php include('includes/connection.php'); ?>
 <section id="create">
     <h2>Nuevo contacto</h2>
     <nav>
@@ -21,5 +20,4 @@
         </fieldset>
     </form>
 </section>
-<?php include("includes/disconnect.php"); ?>
 <?php include "bottom.php"; ?>
